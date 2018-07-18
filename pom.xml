@@ -1,0 +1,123 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>${project.groupId}</groupId>
+	<artifactId>jpa-hibernate-spring-springdata</artifactId>
+	<version>${project.version}</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.version>1.0-SNAPSHOT</project.version>
+		<project.groupId>com.kren.jpa</project.groupId>
+		<java.version>1.8</java.version>
+
+		<junit.jupiter.version>5.0.1</junit.jupiter.version>
+		<junit.platform.version>1.0.1</junit.platform.version>
+
+		<spring.version>4.3.10.RELEASE</spring.version>
+		<spring.data.jpa>2.0.6.RELEASE</spring.data.jpa>
+		<postgresql.version>9.4-1201-jdbc41</postgresql.version>
+		<hibernate.version>5.0.10.Final</hibernate.version>
+
+		<pg.login>we</pg.login>
+		<pg.password>pass</pg.password>
+		<pg.initcon>1</pg.initcon>
+		<pg.maxcon>2</pg.maxcon>
+		<pg.test.jpa.url>jdbc:postgresql://localhost:5432/test_jpa</pg.test.jpa.url>
+	</properties>
+
+	<modules>
+		<module>entity</module>
+		<module>jpa-hibernate</module>
+        <module>spring-jpa</module>
+        <module>spring-data-jpa</module>
+	</modules>
+
+	<dependencies>
+		<!--JUnit 5 -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit.jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-params</artifactId>
+			<version>${junit.jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-launcher</artifactId>
+			<version>${junit.platform.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apiguardian</groupId>
+			<artifactId>apiguardian-api</artifactId>
+			<version>1.0.0</version>
+			<scope>test</scope>
+		</dependency>
+		<!--end JUnit 5 -->
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources/META-INF</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
+				<configuration>
+					<includes>
+						<include>**/Test*.java</include>
+						<include>**/*Test.java</include>
+						<include>**/*Tests.java</include>
+						<include>**/*TestCase.java</include>
+					</includes>
+					<properties>
+						<excludeTags>slow</excludeTags>
+					</properties>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.junit.platform</groupId>
+						<artifactId>junit-platform-surefire-provider</artifactId>
+						<version>${junit.platform.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+</project>

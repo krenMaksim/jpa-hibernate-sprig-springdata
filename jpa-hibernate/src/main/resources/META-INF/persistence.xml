@@ -1,0 +1,29 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+        version="2.0">
+        
+    <persistence-unit name="testJpa">
+    	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    	
+    	<class>com.kren.jpa.entity.TestUserEntity</class> 
+    
+    	<properties>
+    		<!--   <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> -->
+            <property name="javax.persistence.jdbc.url" value="${pg.test.jpa.url}" />
+            <property name="javax.persistence.jdbc.user" value="${pg.login}" />
+            <property name="javax.persistence.jdbc.password" value="${pg.password}" />
+            <property name="javax.persistence.jdbc.write-connections.min" value="${pg.initcon}" />
+            <property name="javax.persistence.jdbc.write-connections.max" value="${pg.maxcon}" />
+            
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />
+        </properties>
+    </persistence-unit>
+</persistence>
+
+<!-- <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">  -->
